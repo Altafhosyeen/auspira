@@ -1,0 +1,43 @@
+# Label taxonomy — apply with github-label-sync or actions-labeler.
+- name: bug
+  color: d73a4a
+  description: Something isn't working as expected
+- name: enhancement
+  color: a2eeef
+  description: New feature or improvement
+- name: architecture
+  color: 7057ff
+  description: Module structure, tooling, and conventions
+- name: ui
+  color: 1d76db
+  description: UI/UX changes
+- name: tests
+  color: 0e8a16
+  description: Test changes
+- name: performance
+  color: e4e669
+  description: Performance improvements
+- name: documentation
+  color: 0075ca
+  description: Documentation only
+- name: ci
+  color: fbca04
+  description: CI/CD pipeline changes
+- name: dependencies
+  color: 0366d6
+  description: Dependency updates
+- name: security
+  color: b60205
+  description: Security fixes or concerns
+- name: needs-review
+  color: c2e0c6
+  description: Ready for review
+- name: good first issue
+  color: 7057ff
+  description: Good for newcomers
+- name: duplicate
+  color: cfd3d7
+  description: Duplicate issue or pull request
+- name: wontfix
+  color: ffffff
+  description: Will not be fixed

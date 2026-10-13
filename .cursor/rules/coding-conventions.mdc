@@ -1,0 +1,34 @@
+---
+description: Auspira frontend coding conventions — follow these for all new code.
+globs: **/*.{ts,tsx,js,jsx,mjs,cjs}
+---
+
+# Coding Conventions
+
+## Formatting & linting
+- **Biome** is the only formatter and linter (`biome.json`). No ESLint, no Prettier.
+- Line width 100, single quotes, semicolons, 2-space indent. `npx biome check --write` on changed files.
+- Pre-commit checks run via **lefthook** (`lefthook.yml`) on **staged files only**; commit messages must be conventional (`<type>(<scope>): <subject>`).
+
+## File & folder naming
+- **kebab-case, always** for files and folders (e.g. `compensation-event-list-page.tsx`, `use-compensation-events.ts`).
+- Export identifiers stay PascalCase — that is code, not file naming.
+
+## New features: modular architecture
+- New features live in `src/modules/<feature>/` as self-contained slices: `components/`, `hooks/`, `services/`, `types/`, `utils/`, `constants/`, plus an `index.ts` barrel.
+- Consumers import from the module root only — no deep imports.
+- Dependency direction is one-way: `components → hooks → services → AUSPIRA`. Components never call the API layer directly.
+- Modules own their API endpoints in their own `constants/` — not in the shared `constants/api.constants.ts`.
+- Reuse shared infrastructure (`AUSPIRA`, `buildUrl`, `IPaginatedApiResponse`) — don't re-implement.
+- Reference implementation: `src/modules/compensation-event/`.
+
+## UI rules
+- **Raw Ant Design only.** Never the legacy X-wrappers (`ButtonX`, `InputX`, `CardX`, `TableX`, ...).
+- **No Tailwind CSS, no custom CSS** inside modules, no inline styling beyond layout sizing (`style={{ width }}`).
+
+## Comments
+- Minimal. One-liner only when something is non-obvious. No JSDoc boilerplate.
+
+## Testing
+- Unit tests with Vitest, colocated under `src/tests/<feature>/` (`.test.ts`).
+- Pure logic (utils/constants) must have tests.

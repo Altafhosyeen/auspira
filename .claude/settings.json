@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx vitest *)",
+      "PowerShell($env:EMIT_PATH = \"C:\\\\Users\\\\BABARA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\h--PeaceDeveloper-04-companies-auspira-dev-Auspira-FrontEnd\\\\fdc789ca-7b03-4695-bc12-de4bd4b2bec5\\\\scratchpad\\\\sample.xlsx\"; npx vitest run tests/utils/excel.emit.test.ts 2>&1 | Select-Object -Last 6)",
+      "Bash(npx eslint *)"
+    ]
+  }
+}

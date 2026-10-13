@@ -1,0 +1,36 @@
+# docker-compose.yml — Local development only
+# Mirrors the Azure Container App environment so you can validate the
+# production Docker image before pushing.
+#
+# Usage:
+#   docker compose up --build          # start
+#   docker compose down                # stop
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Pass public env vars at build time (same as pipeline)
+        NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL:-https://auspira-dev-contaiber-be.jollypond-463e3e8f.uksouth.azurecontainerapps.io}
+    image: auspira-frontend:local
+    container_name: auspira-frontend
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+      # Runtime-only secrets — never bake these into the image
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-local-dev-secret-replace-in-production}
+      NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL:-https://auspira-dev-contaiber-be.jollypond-463e3e8f.uksouth.azurecontainerapps.io}
+      NEXT_PUBLIC_ENVIRONMENT: ${NEXT_PUBLIC_ENVIRONMENT:-production}
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:3000/api/health']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s

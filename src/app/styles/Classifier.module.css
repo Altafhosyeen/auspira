@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.classifierTypeAnchorList :global(.ant-anchor-wrapper .ant-anchor .ant-anchor-link) {
+  @apply mx-1 my-1! rounded-lg! py-1! transition-colors hover:bg-blue-100!;
+}
+.classifierTypeAnchorList :global(.ant-anchor-wrapper .ant-anchor .ant-anchor-link-active) {
+  @apply rounded-lg! bg-blue-100!;
+}
+
+.classifierTypeAnchorList
+  :global(.ant-anchor-wrapper .ant-anchor .ant-anchor-link .ant-anchor-link-title) {
+  @apply py-1;
+}

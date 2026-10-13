@@ -1,0 +1,16 @@
+# https://github.com/evilmartians/lefthook
+# Hooks run only on staged files — legacy code outside your changes stays untouched.
+pre-commit:
+  parallel: true
+  commands:
+    architecture:
+      run: node scripts/check-staged.mjs
+    format-lint:
+      glob: "*.{ts,tsx,js,jsx,mjs,cjs,css,scss,html,md,mdx,json}"
+      run: sh scripts/check-format-staged.sh {staged_files}
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    conventional:
+      run: node scripts/check-commit-message.mjs {1}

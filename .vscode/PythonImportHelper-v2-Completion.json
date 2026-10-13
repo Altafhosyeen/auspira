@@ -1,0 +1,223 @@
+[
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "tempfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "run",
+        "kind": 2,
+        "importPath": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def run(cmd: list[str], cwd: Path | None = None) -> str:\n    result = subprocess.run(cmd, cwd=cwd, check=True, capture_output=True, text=True)\n    return result.stdout.strip()\ndef clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)\n    run([\"git\", \"reset\", \"--hard\", f\"origin/{ref}\"], cwd=repo_dir)\ndef write_source_file(",
+        "detail": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "clone_repo",
+        "kind": 2,
+        "importPath": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)\n    run([\"git\", \"reset\", \"--hard\", f\"origin/{ref}\"], cwd=repo_dir)\ndef write_source_file(\n    path: Path,\n    repo_url: str,\n    commit: str,",
+        "detail": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "update_repo",
+        "kind": 2,
+        "importPath": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)\n    run([\"git\", \"reset\", \"--hard\", f\"origin/{ref}\"], cwd=repo_dir)\ndef write_source_file(\n    path: Path,\n    repo_url: str,\n    commit: str,\n    commit_date: str,\n    snapshot_date: str,",
+        "detail": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "write_source_file",
+        "kind": 2,
+        "importPath": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def write_source_file(\n    path: Path,\n    repo_url: str,\n    commit: str,\n    commit_date: str,\n    snapshot_date: str,\n) -> None:\n    content = \"\\n\".join(\n        [\n            f\"Source: {repo_url}\",",
+        "detail": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--repo-url\", default=DEFAULT_REPO_URL)\n    parser.add_argument(\"--ref\", default=DEFAULT_REF)\n    parser.add_argument(\n        \"--local-repo\",\n        default=None,\n        help=\"Use an existing local repo clone instead of cloning a temp copy.\",\n    )\n    parser.add_argument(",
+        "detail": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_REPO_URL",
+        "kind": 5,
+        "importPath": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "DEFAULT_REPO_URL = \"https://github.com/tailwindlabs/tailwindcss.com\"\nDEFAULT_REF = \"main\"\nLICENSE_URL = \"https://github.com/tailwindlabs/tailwindcss.com#license\"\ndef run(cmd: list[str], cwd: Path | None = None) -> str:\n    result = subprocess.run(cmd, cwd=cwd, check=True, capture_output=True, text=True)\n    return result.stdout.strip()\ndef clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)",
+        "detail": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_REF",
+        "kind": 5,
+        "importPath": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "DEFAULT_REF = \"main\"\nLICENSE_URL = \"https://github.com/tailwindlabs/tailwindcss.com#license\"\ndef run(cmd: list[str], cwd: Path | None = None) -> str:\n    result = subprocess.run(cmd, cwd=cwd, check=True, capture_output=True, text=True)\n    return result.stdout.strip()\ndef clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)",
+        "detail": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "LICENSE_URL",
+        "kind": 5,
+        "importPath": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "LICENSE_URL = \"https://github.com/tailwindlabs/tailwindcss.com#license\"\ndef run(cmd: list[str], cwd: Path | None = None) -> str:\n    result = subprocess.run(cmd, cwd=cwd, check=True, capture_output=True, text=True)\n    return result.stdout.strip()\ndef clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)\n    run([\"git\", \"reset\", \"--hard\", f\"origin/{ref}\"], cwd=repo_dir)",
+        "detail": ".agents.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "run",
+        "kind": 2,
+        "importPath": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def run(cmd: list[str], cwd: Path | None = None) -> str:\n    result = subprocess.run(cmd, cwd=cwd, check=True, capture_output=True, text=True)\n    return result.stdout.strip()\ndef clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)\n    run([\"git\", \"reset\", \"--hard\", f\"origin/{ref}\"], cwd=repo_dir)\ndef write_source_file(",
+        "detail": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "clone_repo",
+        "kind": 2,
+        "importPath": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)\n    run([\"git\", \"reset\", \"--hard\", f\"origin/{ref}\"], cwd=repo_dir)\ndef write_source_file(\n    path: Path,\n    repo_url: str,\n    commit: str,",
+        "detail": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "update_repo",
+        "kind": 2,
+        "importPath": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)\n    run([\"git\", \"reset\", \"--hard\", f\"origin/{ref}\"], cwd=repo_dir)\ndef write_source_file(\n    path: Path,\n    repo_url: str,\n    commit: str,\n    commit_date: str,\n    snapshot_date: str,",
+        "detail": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "write_source_file",
+        "kind": 2,
+        "importPath": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def write_source_file(\n    path: Path,\n    repo_url: str,\n    commit: str,\n    commit_date: str,\n    snapshot_date: str,\n) -> None:\n    content = \"\\n\".join(\n        [\n            f\"Source: {repo_url}\",",
+        "detail": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "def main() -> None:\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--repo-url\", default=DEFAULT_REPO_URL)\n    parser.add_argument(\"--ref\", default=DEFAULT_REF)\n    parser.add_argument(\n        \"--local-repo\",\n        default=None,\n        help=\"Use an existing local repo clone instead of cloning a temp copy.\",\n    )\n    parser.add_argument(",
+        "detail": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_REPO_URL",
+        "kind": 5,
+        "importPath": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "DEFAULT_REPO_URL = \"https://github.com/tailwindlabs/tailwindcss.com\"\nDEFAULT_REF = \"main\"\nLICENSE_URL = \"https://github.com/tailwindlabs/tailwindcss.com#license\"\ndef run(cmd: list[str], cwd: Path | None = None) -> str:\n    result = subprocess.run(cmd, cwd=cwd, check=True, capture_output=True, text=True)\n    return result.stdout.strip()\ndef clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)",
+        "detail": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_REF",
+        "kind": 5,
+        "importPath": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "DEFAULT_REF = \"main\"\nLICENSE_URL = \"https://github.com/tailwindlabs/tailwindcss.com#license\"\ndef run(cmd: list[str], cwd: Path | None = None) -> str:\n    result = subprocess.run(cmd, cwd=cwd, check=True, capture_output=True, text=True)\n    return result.stdout.strip()\ndef clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)",
+        "detail": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    },
+    {
+        "label": "LICENSE_URL",
+        "kind": 5,
+        "importPath": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "description": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "peekOfCode": "LICENSE_URL = \"https://github.com/tailwindlabs/tailwindcss.com#license\"\ndef run(cmd: list[str], cwd: Path | None = None) -> str:\n    result = subprocess.run(cmd, cwd=cwd, check=True, capture_output=True, text=True)\n    return result.stdout.strip()\ndef clone_repo(repo_url: str, ref: str, dest: Path) -> None:\n    run([\"git\", \"clone\", \"--depth\", \"1\", \"--branch\", ref, repo_url, str(dest)])\ndef update_repo(repo_dir: Path, ref: str) -> None:\n    run([\"git\", \"fetch\", \"--depth\", \"1\", \"origin\", ref], cwd=repo_dir)\n    run([\"git\", \"checkout\", ref], cwd=repo_dir)\n    run([\"git\", \"reset\", \"--hard\", f\"origin/{ref}\"], cwd=repo_dir)",
+        "detail": ".claude.skills.tailwind-4-docs.scripts.sync_tailwind_docs",
+        "documentation": {}
+    }
+]

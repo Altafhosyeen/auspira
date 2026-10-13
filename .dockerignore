@@ -1,0 +1,37 @@
+# Dependencies
+node_modules
+npm-debug.log*
+
+# Next.js build output
+.next
+out
+
+# Environment files (injected at runtime via Azure Container Apps secrets)
+.env
+.env.*
+!.env.sample
+
+# Version control
+.git
+.gitignore
+
+# CI/CD
+.github
+azure-pipelines.yml
+
+# Dev tools
+.vscode
+.eslintcache
+*.log
+
+# Test artefacts
+coverage
+test-results
+
+# Docker
+docker-compose*
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db

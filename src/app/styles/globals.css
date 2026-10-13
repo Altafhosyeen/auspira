@@ -1,0 +1,654 @@
+@import 'tailwindcss';
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Root CSS variables — single source of truth for all theme tokens.
+   These are set by ThemeProvider (JS) at runtime, but declared here so
+   Tailwind's @theme and any SSR pass can reference them.
+───────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --background: var(--theme-background);
+  --foreground: var(--theme-text);
+
+  /* Auth page specific */
+  --auth-page-bg: var(--theme-background); /* #EBF1F8 — slate-blue tint  */
+  --auth-card-bg: var(--theme-surface); /* #FFFFFF — pure white card  */
+  --auth-card-shadow: var(--theme-shadow-panel); /* subtle blue shadow         */
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Tailwind v4 @theme — exposes CSS vars as tw utility classes
+   e.g. bg-theme-primary, text-theme-text-secondary, border-theme-border
+───────────────────────────────────────────────────────────────────────────── */
+@theme inline {
+  --font-sans: var(--theme-font-family);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Accent / primary */
+  --color-theme-primary: var(--theme-primary);
+  --color-theme-primary-dark: var(--theme-primary-dark);
+  --color-theme-primary-deep: var(--theme-primary-deep);
+  --color-theme-primary-light: var(--theme-primary-light);
+  --color-theme-primary-soft: var(--theme-primary-soft);
+
+  /* Text */
+  --color-theme-text: var(--theme-text);
+  --color-theme-text-secondary: var(--theme-text-secondary);
+  --color-theme-text-subtle: var(--theme-text-subtle);
+
+  /* Surfaces & borders */
+  --color-theme-surface: var(--theme-surface);
+  --color-theme-background: var(--theme-background);
+  --color-theme-border: var(--theme-border);
+  --color-theme-border-subtle: var(--theme-border-subtle);
+
+  /* Accent link color */
+  --color-theme-accent: var(--theme-accent);
+
+  /* ─── Design-system Color styles (Figma base level) ───────────────────────
+     Utilities: text-main-p, bg-main-p, text-icon, text-success, border-error … */
+  --color-main-p: var(--ds-main-p);
+  --color-text: var(--ds-text);
+  --color-icon: var(--ds-icon);
+  --color-success: var(--ds-success);
+  --color-error: var(--ds-error);
+  --color-warning: var(--ds-warning);
+  --color-surface-dark: var(--ds-surface-dark);
+  --color-surface-subtle: var(--ds-surface-subtle);
+  --color-surface-muted: var(--ds-surface-muted);
+  --color-surface-table-header: var(--ds-surface-table-header);
+
+  /* ─── Status-badge palette ─────────────────────────────────────────────────
+     Raw colors → text-badge-info / bg-badge-info-soft / border-badge-info … */
+  --color-badge-neutral: var(--badge-neutral-fg);
+  --color-badge-neutral-soft: var(--badge-neutral-bg);
+  --color-badge-info: var(--badge-info-fg);
+  --color-badge-info-soft: var(--badge-info-bg);
+  --color-badge-success: var(--badge-success-fg);
+  --color-badge-success-soft: var(--badge-success-bg);
+  --color-badge-warning: var(--badge-warning-fg);
+  --color-badge-warning-soft: var(--badge-warning-bg);
+  --color-badge-error: var(--badge-error-fg);
+  --color-badge-error-soft: var(--badge-error-bg);
+  --color-badge-accent: var(--badge-accent-fg);
+  --color-badge-accent-soft: var(--badge-accent-bg);
+}
+
+/* ─── Status-badge composite utilities (soft bg + fg pair) ──────────────────
+   Use on pills/chips: <span className="badge-info px-2 py-0.5 rounded">New</span> */
+@utility badge-neutral {
+  background-color: var(--badge-neutral-bg);
+  color: var(--badge-neutral-fg);
+}
+@utility badge-info {
+  background-color: var(--badge-info-bg);
+  color: var(--badge-info-fg);
+}
+@utility badge-success {
+  background-color: var(--badge-success-bg);
+  color: var(--badge-success-fg);
+}
+@utility badge-warning {
+  background-color: var(--badge-warning-bg);
+  color: var(--badge-warning-fg);
+}
+@utility badge-error {
+  background-color: var(--badge-error-bg);
+  color: var(--badge-error-fg);
+}
+@utility badge-accent {
+  background-color: var(--badge-accent-bg);
+  color: var(--badge-accent-fg);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--theme-background);
+  color: var(--theme-text);
+  font-family: var(--theme-font-family, sans-serif);
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--theme-border);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--theme-primary-light);
+}
+
+/* ─── Layout helpers ────────────────────────────────────────────────────── */
+.theme-sider-gradient {
+  background: var(--theme-gradient-sider);
+  box-shadow: var(--theme-shadow-sider);
+}
+
+.theme-panel {
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  box-shadow: var(--theme-shadow-panel);
+}
+
+/* Auth page wrapper */
+.auth-page-bg {
+  background: var(--auth-page-bg);
+}
+
+/* Auth card */
+.auth-card {
+  background: var(--auth-card-bg);
+  box-shadow: var(--auth-card-shadow);
+}
+
+/* --------------------------------------------------------------------------
+   JSON document review overrides
+   Make extracted JSON metadata pages use consistent dark text instead of
+   class-level slate-gray variants.
+--------------------------------------------------------------------------- */
+.document-json-review-root {
+  color: var(--theme-text);
+}
+.document-json-review-root
+  :where(.text-slate-500, .text-slate-600, .text-slate-400, .text-slate-300) {
+  color: var(--theme-text) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Design-system "Text styles" (Figma base level)
+   Source of truth mirrored in constants/theme.constants.ts → TYPOGRAPHY.
+   Each token is font-size / line-height / font-weight.
+
+   Usage: <p className="ds-body">…</p>, <h2 className="ds-heading-2">…</h2>
+───────────────────────────────────────────────────────────────────────────── */
+@utility ds-display {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
+}
+@utility ds-heading-1 {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
+}
+@utility ds-heading-2 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+}
+@utility ds-heading-3 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+}
+@utility ds-body-large {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+@utility ds-body {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+@utility ds-body-strong {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+@utility ds-caption {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+}
+@utility ds-micro {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+}
+
+/* ─── Typography base — semantic HTML defaults follow the scale ─────────────── */
+@layer base {
+  h1 {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 600;
+  }
+}
+
+/* ─── Typography utilities — single source of truth for app headings ─────
+   Use these instead of ad-hoc size/weight/color combos so every screen
+   (Project Onboarding stages, section cards, etc.) stays consistent.
+   - heading-page:    page/stage title (PageX heading row)
+   - heading-section: section-card title inside a page (e.g. "Upload Documents")
+   - heading-card:    small card/panel title inside a section
+─────────────────────────────────────────────────────────────────────────── */
+@utility heading-page {
+  @apply ds-heading-2 text-main-p;
+}
+
+@utility heading-section {
+  @apply ds-heading-2 text-text tracking-tight;
+}
+
+@utility heading-card {
+  @apply ds-body-strong text-text tracking-tight;
+}
+
+/* ─── Utility aliases ───────────────────────────────────────────────────── */
+@layer utilities {
+  .text-theme_primary {
+    color: var(--theme-primary);
+  }
+}
+
+/* ─── Ant Design overrides ─────────────────────────────────────────────── */
+.upload-select .ant-select-selector {
+  @apply h-10;
+}
+
+.upload-select .ant-select-arrow {
+  @apply mt-[0.5px];
+}
+
+.ant-btn-primary {
+  @apply from-theme-primary-dark to-theme-primary bg-linear-to-r hover:opacity-90;
+}
+
+.color-icon-primary {
+  color: var(--theme-primary);
+}
+
+.ant-layout-header {
+  @apply p-0!;
+}
+
+/* Company name search dropdown — highlight the active/hovered option in blue
+   instead of AntD's default grey. The visible card is the inner <div>. */
+.company-name-search-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled),
+.company-name-search-dropdown
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: transparent;
+}
+
+.company-name-search-dropdown .ant-select-item-option-active .ant-select-item-option-content > div,
+.company-name-search-dropdown
+  .ant-select-item-option-selected
+  .ant-select-item-option-content
+  > div {
+  border-color: #3b82f6; /* blue-500 */
+  background-color: #eff6ff; /* blue-50 */
+}
+
+/* Contract Registry tabs — fixed header layout: the heading + tab strip stay
+   put while ONLY the tab content scrolls (the content-holder is the scroller). */
+.contract-tabs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.contract-tabs .ant-tabs {
+  flex: 1;
+  min-height: 0;
+}
+.contract-tabs .ant-tabs-content-holder {
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* Tint the nav (header) strip only, not the content.
+   !important: antd's runtime-injected styles load after this sheet and
+   would otherwise re-apply their default 16px margin. */
+.contract-tabs .ant-tabs-nav {
+  background: #eef2ff; /* indigo-50 */
+  border-radius: 12px;
+  padding: 0 12px;
+  margin: 0 0 10px !important;
+}
+
+/* Spread the tabs across the full nav strip instead of bunching them left.
+   antd stacks tabs with a fixed 32px left margin, so that has to go first —
+   space-between then splits the leftover width into equal gaps. */
+.contract-tabs .ant-tabs-nav-list {
+  width: 100%;
+  justify-content: space-between;
+}
+.contract-tabs .ant-tabs-tab + .ant-tabs-tab {
+  margin-left: 0 !important;
+}
+.contract-tabs .ant-tabs-tab {
+  position: relative;
+  padding: 12px 4px;
+}
+
+/* Contract Registry tabs — gradient underline under the active tab.
+   Antd's own `.ant-tabs-ink-bar` positions itself with a `translateX` computed
+   from the tabs' default packed-left layout; our `justify-content: space-between`
+   above (spreading tabs across the full nav width) moves each tab away from that
+   assumed position, so the ink bar drifts left of whichever tab is actually
+   active. Drawing the underline as a pseudo-element on the tab itself sidesteps
+   that measurement entirely — it's always exactly where that tab sits. */
+.contract-tabs .ant-tabs-ink-bar {
+  display: none;
+}
+.contract-tabs .ant-tabs-tab-active::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: 0;
+  height: 3px;
+  border-radius: 9999px;
+  background: var(--ds-accent-gradient);
+}
+
+.contract-tabs .ant-tabs-nav::before {
+  border-bottom: none;
+}
+
+/* Inactive tab text — muted, regular weight */
+.contract-tabs .ant-tabs-tab .ant-tabs-tab-btn {
+  color: #64748b; /* slate-500 */
+  font-weight: 400;
+}
+
+/* Active tab text — dark, bold (override Ant's default primary-blue) */
+.contract-tabs .ant-tabs-tab-active .ant-tabs-tab-btn,
+.contract-tabs .ant-tabs-tab-active .ant-tabs-tab-btn:active,
+.contract-tabs .ant-tabs-tab:hover .ant-tabs-tab-btn {
+  color: #0f172a !important; /* slate-900 */
+  font-weight: 700;
+}
+
+.ant-drawer-content-wrapper {
+  @apply m-5;
+}
+
+/* ─── Animation keyframes for dashboard components ─────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ant-modal-container {
+  animation: fadeIn 0.7s ease-out;
+}
+.ant-modal-content {
+  animation: slideUp 0.7s ease-out;
+}
+
+/* ─── Signals Inbox table ──────────────────────────────────────────────────
+   Header fill comes from the Ant `Table.headerBg` token (see antd-provider);
+   only the overrides Ant has no token for live here. */
+.signals-table .ant-table-thead > tr > th {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-main-p) 14%, white);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+.signals-table .ant-table-thead > tr > th::before {
+  display: none; /* remove Ant's default header column divider */
+}
+
+/* Keep headers pinned for custom Ant tables that render inside local overflow containers. */
+.custom-antd-table .ant-table-thead > tr > th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+/* ─── PDF selectable text layer (pdf.js) ────────────────────────────────────
+   The PdfViewer renders each page to a <canvas> and overlays this transparent
+   text layer so the user can drag-select / copy text. Ported from pdf.js'
+   TextLayer.css (we drive pdf.js' core TextLayer directly, not react-pdf's
+   <Page>, so its stylesheet isn't otherwise loaded). Positions are set by
+   pdf.js via the `--total-scale-factor` / `--scale-factor` CSS vars, which the
+   viewer sets per page. */
+.pdf-page-shell {
+  position: relative;
+  line-height: 0; /* kill the inline-canvas descender gap under the page */
+}
+.textLayer {
+  /* pdf.js sizes every span with `font-size: calc(var(--total-scale-factor) * Npx)`
+     and pre-computes each span's scaleX() against that intended size. In the
+     stock viewer this var is defined on `.pdfViewer .page`; we don't load that
+     stylesheet, so derive it here from the `--scale-factor` / `--user-unit`
+     vars PdfPage sets per page. Without it the calc() is invalid, spans render
+     at the inherited font size, and glyph geometry (text selection + highlight
+     rectangles measured from DOM Ranges) drifts off the canvas text. */
+  --user-unit: 1;
+  --total-scale-factor: calc(var(--scale-factor) * var(--user-unit));
+  --scale-round-x: 1px;
+  --scale-round-y: 1px;
+
+  position: absolute;
+  text-align: initial;
+  inset: 0;
+  overflow: clip;
+  line-height: 1;
+  text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+  z-index: 2;
+  caret-color: CanvasText;
+}
+.textLayer :is(span, br) {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  margin: 0;
+  transform-origin: 0 0;
+}
+.textLayer span.markedContent {
+  top: 0;
+  height: 0;
+}
+/* Selection paints over the transparent glyphs so the yellow canvas highlight
+   still shows through when nothing is selected. */
+.textLayer ::selection {
+  background: rgba(37, 99, 235, 0.28);
+}
+.textLayer br::selection {
+  background: transparent;
+}
+.textLayer .endOfContent {
+  display: block;
+  position: absolute;
+  inset: 100% 0 0;
+  z-index: -1;
+  cursor: default;
+  user-select: none;
+}
+.textLayer.selecting .endOfContent {
+  top: 0;
+}
+/* While the highlighter is on, preview the drag selection in the same yellow the
+   persisted mark uses, so what you drag over is what gets highlighted. */
+.pdf-highlighting ::selection {
+  background: rgba(255, 213, 0, 0.4);
+}
+
+/* ─── Highlight layer (components/pdf-highlight) ─────────────────────────────
+   Sits between the canvas (z 0) and the selectable text layer (z 2). Never
+   takes pointer events, so selection and the highlighter tool work through it.
+   Rectangles are positioned in percentages of the page box, which is why they
+   stay correct through a zoom change without being re-measured. */
+.pdfHighlightLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: clip;
+}
+.pdfHighlight {
+  position: absolute;
+  border-radius: 2px;
+  /* Multiply keeps the glyphs legible under the highlight instead of washing
+     them out, the same way a real marker pen behaves. */
+  mix-blend-mode: multiply;
+  transition: background-color 120ms ease-out;
+}
+/* One short pulse on the active match draws the eye without the distraction of
+   a looping animation. */
+.pdfHighlight--active {
+  animation: pdf-highlight-pulse 620ms ease-out 1;
+}
+@keyframes pdf-highlight-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 6px rgba(255, 140, 0, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdfHighlight {
+    transition: none;
+  }
+  .pdfHighlight--active {
+    animation: none;
+  }
+}
+
+.cross-reference-drawer .ant-modal-content {
+  @apply overflow-hidden! rounded-[10px]! p-0!;
+}
+
+/* ─── Filter-toolbar DatePicker, styled to match the 32px filter pills ─────
+   Shared by every list page's toolbar (Awareness, Watchtower & Action Queue) — see
+   FILTER_DATE_PICKER in constants/list-page.constants.ts. antd owns the control's height,
+   inner input font and focus shadow, none of which a Tailwind class on the wrapper can reach,
+   so the pill match has to be made here. */
+.list-filter-date-picker.ant-picker {
+  height: 32px; /* matches the 32px h-8 filter pills either side of it */
+  box-shadow: none !important;
+}
+/* Calendar glyph sits before the label, matching the pill's leading icon. */
+.list-filter-date-picker.ant-picker .ant-picker-prefix {
+  margin-inline-end: 6px;
+}
+.list-filter-date-picker.ant-picker .ant-picker-input > input {
+  font-size: inherit;
+  line-height: 16px;
+  font-weight: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.list-filter-date-picker.ant-picker .ant-picker-input > input::placeholder {
+  color: rgb(71 85 105); /* slate-600 */
+  font-weight: 500;
+}
+.list-filter-date-picker.ant-picker:hover,
+.list-filter-date-picker.ant-picker.ant-picker-focused {
+  border-color: rgb(203 213 225) !important; /* slate-300 */
+  box-shadow: none !important;
+}
+
+/* ─── App header breadcrumb ──────────────────────────────────────────────
+   Lives inline in the 52px header row (BaseHeader), so it must stay on one
+   line and clip instead of wrapping. AntD's runtime-injected styles set the
+   <ol> to flex-wrap: wrap and load after this sheet, so a plain Tailwind
+   class loses the specificity tie-break; !important forces it. */
+.app-header-breadcrumb {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+.app-header-breadcrumb ol {
+  display: flex;
+  flex-wrap: nowrap !important;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+.app-header-breadcrumb li {
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.app-header-breadcrumb li:not(:last-child) {
+  flex: 0 0 auto;
+  max-width: none;
+  overflow: visible;
+}
+.app-header-breadcrumb li:last-child {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.app-header-breadcrumb .ant-breadcrumb-link,
+.app-header-breadcrumb .app-breadcrumb-title {
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  gap: 0.25rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.app-header-breadcrumb li:not(:last-child) .ant-breadcrumb-link,
+.app-header-breadcrumb li:not(:last-child) .app-breadcrumb-title,
+.app-header-breadcrumb li:not(:last-child) .app-breadcrumb-text {
+  max-width: none;
+  overflow: visible;
+  text-overflow: clip;
+}
+.app-header-breadcrumb .app-breadcrumb-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.app-header-breadcrumb .ant-breadcrumb-separator {
+  flex: 0 0 auto;
+}

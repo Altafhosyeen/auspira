@@ -1,0 +1,22 @@
+.dashboard-segment {
+  /* wrapper */
+}
+
+/* IMPORTANT: force AntD root override */
+.segment-control {
+  background: #eff4ff !important;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+/* selected item (MUST use global) */
+.segment-control :global(.ant-segmented-item-selected) {
+  background-color: #3578b2 !important;
+  color: #fff !important;
+  border-radius: 8px;
+}
+
+/* hover + items */
+.segment-control :global(.ant-segmented-item) {
+  border-radius: 8px;
+}

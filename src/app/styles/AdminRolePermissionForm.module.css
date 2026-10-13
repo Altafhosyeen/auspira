@@ -1,0 +1,20 @@
+@reference 'tailwindcss';
+
+.permissionCollapse {
+  @apply border-none! bg-[#FFFFFF]!;
+}
+.permissionCollapse :global(.ant-collapse-item) {
+  @apply mb-2! rounded-[10px]! border border-[#E3E3E3] bg-[#FAFAFA]! pt-3.5! pb-1! pl-3.5!;
+}
+.permissionCollapse :global(.ant-collapse-panel) {
+  @apply bg-[#FAFAFA]!;
+}
+.permissionCollapse :global(.ant-collapse-expand-icon) {
+  @apply mt-0.5!;
+}
+.permissionCollapse :global(.ant-collapse-item .ant-collapse-body .ant-checkbox) {
+  @apply rounded-[3px]!;
+}
+.permissionCollapse :global(.ant-collapse-item .ant-collapse-header) {
+  @apply h-9.5! p-0!;
+}

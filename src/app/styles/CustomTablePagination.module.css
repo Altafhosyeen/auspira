@@ -1,0 +1,22 @@
+/* ------------------------ CUSTOM PAGINATION CLASSES ----------------------- */
+
+.customPagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Move total text inline */
+.customPagination :global(.ant-pagination-total-text) {
+  order: 2;
+}
+
+/* Prev button */
+.customPagination :global(.ant-pagination-prev) {
+  order: 1;
+}
+
+/* Next button */
+.customPagination :global(.ant-pagination-next) {
+  order: 3;
+}

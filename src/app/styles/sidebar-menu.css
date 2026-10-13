@@ -1,0 +1,21 @@
+/* Sidebar submenu: vertical line connecting the items of an expanded group.
+   Ant Design has no Menu token for this, so it stays a pseudo-element. All the
+   other sidebar styling lives in the Menu theme tokens (antd-provider.tsx). */
+.app-sidebar-menu .ant-menu-sub.ant-menu-inline > .ant-menu-item {
+  position: relative;
+  overflow: visible;
+}
+
+.app-sidebar-menu .ant-menu-sub.ant-menu-inline > .ant-menu-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: auto;
+  border-inline-end: 0;
+  left: -10px;
+  top: calc(50% + 4px);
+  width: 1px;
+  height: calc(100% + 17px - 50% - 4px);
+  background: var(--theme-gray-4);
+  opacity: 1;
+  transform: none;
+}

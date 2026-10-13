@@ -1,0 +1,30 @@
+// Module barrel — import from here, never from deep paths.
+
+export { default as DefectNoticeBasicDetailsSection } from './components/defect-notice-basic-details-section';
+export { default as DefectNoticeDetailHeader } from './components/defect-notice-detail-header';
+export { default as DefectNoticeDetailPage } from './components/defect-notice-detail-page';
+export { default as DefectNoticeDetailSkeleton } from './components/defect-notice-detail-skeleton';
+export { default as DefectNoticeDocumentTab } from './components/defect-notice-document-tab';
+export { default as DefectNoticeEmailThread } from './components/defect-notice-email-thread';
+export { default as DefectNoticeFormActions } from './components/defect-notice-form-actions';
+export { default as DefectNoticeFormBanner } from './components/defect-notice-form-banner';
+export { default as DefectNoticeFormHeader } from './components/defect-notice-form-header';
+export { default as DefectNoticeFormPage } from './components/defect-notice-form-page';
+export { default as DefectNoticeFormSection } from './components/defect-notice-form-section';
+export { default as DefectNoticeInformationSection } from './components/defect-notice-information-section';
+export { default as DefectNoticeListPage } from './components/defect-notice-list-page';
+export { default as DefectNoticeOverviewPanel } from './components/defect-notice-overview-panel';
+export { default as DefectNoticeRegisterHeader } from './components/defect-notice-register-header';
+export { default as DefectNoticeSectionCard } from './components/defect-notice-section-card';
+export { default as DefectNoticeStatusBadge } from './components/defect-notice-status-badge';
+export { default as DefectNoticeTable } from './components/defect-notice-table';
+export { default as DefectNoticeThemeProvider } from './components/defect-notice-theme-provider';
+export * from './constants/defect-notice.constants';
+export * from './constants/defect-notice-form.theme';
+export * from './constants/defect-notice-register.theme';
+export * from './hooks/use-defect-notices';
+export * from './services/defect-notice.service';
+export * from './types/defect-notice.types';
+export * from './utils/defect-notice.utils';
+export * from './utils/defect-notice-export.utils';
+export * from './utils/defect-notice-form.utils';
